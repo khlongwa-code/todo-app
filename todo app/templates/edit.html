@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Todo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+            display: flex; /* Added */
+            flex-direction: column; /* Added */
+            align-items: center; /* Added */
+        }
+
+        label {
+            margin-right: 10px;
+            color: #495057;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            width: 70%;
+            margin-bottom: 10px; /* Added */
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px; /* Added */
+            width: 100%; /* Added */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Todo</h1>
+        <form action="{{ url_for('edit', todo_id=todo_task.id) }}" method="POST">
+            <label for="new_title">New Title:</label>
+            <input type="text" id="new_title" name="new_title" value="{{ todo_task.title }}" required>
+            <button type="submit">Update</button>
+        </form>
+        <a href="{{ url_for('base') }}">
+            <button type="button">Back</button>
+        </a>
+    </div>
+</body>
+</html>
