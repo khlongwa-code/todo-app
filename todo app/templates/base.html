@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO App</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      overflow-y: auto;
+      max-height: 800px;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #343a40;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .input-container label {
+      margin-right: 10px;
+      color: #495057;
+    }
+
+    .input-container input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+      width: 60%;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-container input[type="text"]:focus {
+      border-color: #007bff;
+    }
+
+    .input-container button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .input-container button:hover {
+      background-color: #0056b3;
+    }
+
+    .task {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f1f3f5;
+    }
+
+    .task-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #343a40;
+    }
+
+    .task-status {
+      margin-top: 5px;
+    }
+
+    .completed {
+      border: none;
+      border-radius: 5px;
+      background-color: #28a745;
+    }
+
+    .not-completed {
+      border: none;
+      border-radius: 5px;
+      background-color: #ffc107;
+    }
+
+    .edit-btn,
+    .delete-btn,
+    .update-btn {
+      margin-top: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .edit-btn:hover,
+    .delete-btn:hover,
+    .update-btn:hover {
+      filter: brightness(90%);
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .update-btn {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    button[type="submit"] {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>TODO App</h1>
+    <form action="/add" method="post">
+      <div class="input-container">
+        <label for="title">Enter a task:</label>
+        <input type="text" name="title" id="title" placeholder="Enter Todo task..." required>
+        <button type="submit">Add</button>
+      </div>
+    </form>
+    {% for todo in todo_list %}
+    <div class="task">
+      <div class="task-title">Task: {{ todo.title }}</div>
+      <div class="task-status">
+        {% if todo.complete %}
+        <button class="completed">Completed</button>
+        {% else %}
+        <button class="not-completed">Not completed</button>
+        {% endif %}
+      </div>
+      <div class="buttons">
+        <button class="update-btn"><a href="/update/{{ todo.id }}" style="text-decoration: none; color: #fff;">Update</a></button>
+        <button class="delete-btn"><a href="/delete/{{ todo.id }}" style="text-decoration: none; color: #fff;">Delete</a></button>
+        <button class="edit-btn"><a href="/edit/{{ todo.id }}" style="text-decoration: none; color: #fff;">Edit</a></button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+
+</html>
